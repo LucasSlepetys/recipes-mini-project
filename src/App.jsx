@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { getContext } from './CONTROL/GlobalContext';
-import Hero from './Hero';
-import AddRecipe from './AddRecipe';
+import Hero from './Hero_Component/Hero';
+import AddRecipe from './Add_Recipe_Component/AddRecipe';
 
 function App() {
   const { state } = getContext();

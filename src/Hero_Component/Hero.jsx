@@ -1,5 +1,8 @@
-import { getContext } from './CONTROL/GlobalContext';
-import { TOGGLE_SHOW_RECIPES, TOGGLE_SHOW_ADD_RECIPE } from './CONTROL/actions';
+import { getContext } from '../CONTROL/GlobalContext';
+import {
+  TOGGLE_SHOW_RECIPES,
+  TOGGLE_SHOW_ADD_RECIPE,
+} from '../CONTROL/actions';
 
 const Hero = () => {
   const { dispatch } = getContext();
@@ -8,7 +11,7 @@ const Hero = () => {
     <div className='hero'>
       <button
         type='button'
-        className='btn'
+        className='btn btn-reshape'
         onClick={() => {
           dispatch({ type: TOGGLE_SHOW_RECIPES });
         }}
@@ -17,7 +20,7 @@ const Hero = () => {
       </button>
       <button
         type='button'
-        className='btn'
+        className='btn btn-reshape'
         onClick={() => {
           dispatch({ type: TOGGLE_SHOW_ADD_RECIPE });
         }}

@@ -1,3 +1,5 @@
+/* ---- global default values ---- */
+
 *,
 ::after,
 ::before {
@@ -8,32 +10,30 @@
 
 :root {
 
+  /* ---- global variables ---- */
+
   --primary-btn-bg-color: #ffffff;
   --primary-btn-color: hsl(191, 95%, 42%);
-
+  --bg-color: hsl(191, 77%, 81%);
   --btn-floating-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.1), 0 2px 7px 0 rgba(0, 0, 0, 0.06);
+
+  /* ---- global variables END ---- */
+
+
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-size: 12px;
-
   color: rgba(0, 0, 0, 0.87);
-  background-color: hsl(191, 77%, 81%);
+  background-color: var(--bg-color);
 }
+
+/* ---- global default values END ---- */
+
+/* ---- global re-useable classes ---- */
 
 .center-child {
   display: flex;
   justify-content: center;
-}
-
-.hero {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  justify-content: center;
-  width: 100%;
-
 }
 
 .btn {
@@ -44,7 +44,7 @@
   cursor: pointer;
   letter-spacing: 2px;
   padding: 0.375rem 0.75rem;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   transition: 0.3s ease-in-out all;
   text-transform: capitalize;
   display: inline-block;
@@ -54,6 +54,11 @@
 .btn:hover {
   background: var(--primary-btn-color);
   color: var(--primary-btn-bg-color);
+}
+
+.long-btn {
+  padding: 0.1rem 0.75rem;
+  height: 40px;
 }
 
 .bg-switch {
@@ -69,13 +74,32 @@
 .floating-btn {
   border-radius: 50%;
   text-align: center;
-  font-size: 0.75rem;
+  font-size: 0.70rem;
   text-transform: uppercase;
-  width: 65px;
-  height: 65px;
+  width: 59px;
+  height: 59px;
   box-shadow: var(--btn-floating-shadow);
-
 }
+
+/* ---- global re-useable classes END ---- */
+
+/* ---- HERO COMPONENT ---- */
+
+.hero {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+
+
+/* ---- HERO COMPONENT ENDS ---- */
+
+/* ---- ADD RECIPE COMPONENT ---- */
 
 .add_recipe_container {
   position: absolute;
@@ -84,6 +108,10 @@
   top: 0;
   padding: 20px;
   overflow-y: scroll;
+}
+
+.add_recipe_container::-webkit-scrollbar {
+  display: none;
 }
 
 .add_recipe_container h4 {
@@ -96,7 +124,7 @@
 .add_recipe_container .input_row {
   display: flex;
   flex-direction: column;
-  margin: 20px 0;
+  margin: 30px 0 60px 0;
 }
 
 .add_recipe_container .input_row label {
@@ -116,11 +144,131 @@
   font-size: 1.5rem;
 }
 
+.add_recipe_container .input_row input::placeholder {
+  color: rgba(60, 60, 60, 0.276);
+}
+
+.add_recipe_container .input_row .name-label {
+  color: black;
+  font-size: 2rem;
+  text-align: center;
+  text-transform: uppercase;
+  margin: 10px;
+}
+
+.add_recipe_container .input_row .name-input {
+  border: none;
+  box-shadow: var(--btn-floating-shadow);
+}
+
 .footer_container {
   position: absolute;
   left: 0;
   bottom: 0;
   width: 100%;
   display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttons_container {
+  display: flex;
   justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* ----- Dialog ----- */
+
+dialog {
+  width: 100%;
+  height: 100%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: none;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.597);
+}
+
+.modal {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.modal h3 {
+  font-size: 2rem;
+  margin: 20px
+}
+
+.modal textarea {
+  width: 90%;
+  height: 50%;
+  padding: 12px 20px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: var(--bg-color);
+  font-size: 16px;
+  resize: none;
+}
+
+.modal .close-icon {
+  position: absolute;
+  font-size: 3rem;
+  color: red;
+  top: 10px;
+  right: 10px;
+}
+
+
+/* ----- Dialog End ----- */
+
+/* ---- ADD RECIPE COMPONENT END---- */
+
+@media (min-width: 600px) {
+
+  :root {
+    font-size: 16px;
+  }
+
+  .btn-reshape {
+    font-size: 2rem;
+  }
+
+  .add_recipe_container .input_row {
+    align-items: center;
+  }
+
+  .add_recipe_container .input_row input {
+    width: 400px;
+  }
+
+  .buttons_container {
+    width: 500px;
+  }
+
+  .floating-btn {
+    border-radius: 10px;
+    text-align: center;
+    font-size: 0.70rem;
+    text-transform: uppercase;
+    width: 100px;
+    height: auto;
+    box-shadow: var(--btn-floating-shadow);
+  }
+
+  .long-btn {
+    font-size: 1rem;
+  }
+
+  dialog {
+    width: 500px;
+    height: 500px;
+    background-color: white
+  }
 }

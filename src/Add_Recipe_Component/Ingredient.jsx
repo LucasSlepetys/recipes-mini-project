@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import { ADD_INGREDIENT_TO_NEW_RECIPE } from './CONTROL/actions';
-import { getContext } from './CONTROL/GlobalContext';
+import { ADD_INGREDIENT_TO_NEW_RECIPE } from '../CONTROL/actions';
+import { getContext } from '../CONTROL/GlobalContext';
 function Ingredient({ id, num }) {
   const { dispatch } = getContext();
   const inputRef = useRef(null);
@@ -19,7 +19,13 @@ function Ingredient({ id, num }) {
   return (
     <div className='input_row'>
       <label htmlFor={id}>Ingredient {num}:</label>
-      <input type='text' id={id} ref={inputRef} onChange={handleChange} />
+      <input
+        type='text'
+        id={id}
+        ref={inputRef}
+        onChange={handleChange}
+        placeholder={num === 1 ? '400 Grams of Rice' : ''}
+      />
     </div>
   );
 }

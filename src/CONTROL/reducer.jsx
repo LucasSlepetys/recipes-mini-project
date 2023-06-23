@@ -7,6 +7,7 @@ import {
   ADD_NEW_RECIPE,
   CLEAR_NEW_RECIPE,
   RESET_COUNT,
+  ADD_DESCRIPTION,
 } from './actions';
 
 const reducer = (state, action) => {
@@ -40,7 +41,7 @@ const reducer = (state, action) => {
   if (action.type === ADD_NEW_RECIPE) {
     return {
       ...state,
-      recipes: state.recipeToAdd,
+      recipes: [...state.recipes, state.recipeToAdd],
     };
   }
 
@@ -49,6 +50,7 @@ const reducer = (state, action) => {
       ...state,
       recipeToAdd: {
         name: 'Name_Default',
+        description: 'description',
       },
     };
   }
@@ -66,6 +68,17 @@ const reducer = (state, action) => {
       count: 1,
     };
   }
+
+  if (action.type === ADD_DESCRIPTION) {
+    return {
+      ...state,
+      recipeToAdd: {
+        ...state.recipeToAdd,
+        description: action.payload.recipe_description,
+      },
+    };
+  }
+
   throw new Error(`No matching ${action.type} ---> Action type`);
 };
 
