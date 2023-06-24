@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { FaTimes } from 'react-icons/fa';
+import { FaCheckDouble } from 'react-icons/fa';
 import { getContext } from '../CONTROL/GlobalContext';
 import { ADD_DESCRIPTION } from '../CONTROL/actions';
 
@@ -22,7 +22,9 @@ const Dialog = () => {
       <div className='modal'>
         <h3>Enter Recipe Description:</h3>
         <textarea ref={textareaRef} onChange={handleChange}></textarea>
-        <FaTimes className='close-icon' onClick={closeModal} />
+        <div className='save-icon' onClick={closeModal}>
+          Save <FaCheckDouble />
+        </div>
       </div>
     </dialog>
   );

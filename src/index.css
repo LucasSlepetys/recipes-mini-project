@@ -81,6 +81,18 @@
   box-shadow: var(--btn-floating-shadow);
 }
 
+.float-left-bottom {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+}
+
+.float-right-bottom {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+}
+
 /* ---- global re-useable classes END ---- */
 
 /* ---- HERO COMPONENT ---- */
@@ -201,6 +213,14 @@ dialog {
   height: 100%;
 }
 
+.modal .save-icon {
+  font-size: 2rem;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  color: rgba(62, 241, 26, 0.803);
+}
+
 .modal h3 {
   font-size: 2rem;
   margin: 20px
@@ -217,10 +237,10 @@ dialog {
   resize: none;
 }
 
-.modal .close-icon {
+.modal .single_recipe_header {
   position: absolute;
   font-size: 3rem;
-  color: red;
+  color: rgb(65, 241, 91);
   top: 10px;
   right: 10px;
 }
@@ -240,12 +260,6 @@ dialog {
   align-items: center;
   overflow: scroll;
 
-}
-
-.float-left-bottom {
-  position: absolute;
-  left: 20px;
-  bottom: 20px;
 }
 
 .recipes_container .list_of_recipes {
@@ -280,19 +294,31 @@ dialog {
 
 .single_recipe_container .single_recipe .single_recipe_header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   box-shadow: var(--btn-floating-shadow);
 }
 
-.single_recipe_container .single_recipe .single_recipe_header .arrow_icon {
+.single_recipe_container .single_recipe .single_recipe_header .left_header {
+  display: flex;
+  align-items: center;
+}
+
+.single_recipe_container .single_recipe .single_recipe_header .left_header .arrow_icon {
   margin-right: 15px;
   font-size: 2rem;
   color: var(--primary-btn-color)
 }
 
-.single_recipe_container .single_recipe .single_recipe_header h5 {
+.single_recipe_container .single_recipe .single_recipe_header .left_header h5 {
   font-size: 1.3rem;
   text-transform: capitalize;
+}
+
+.single_recipe_container .single_recipe .single_recipe_header .right_header {
+  font-size: 1.7rem;
+  color: rgba(255, 0, 0, 0.479);
+  margin: 10px;
 }
 
 .single_recipe_container .single_recipe .ingredients_list_container {
@@ -314,7 +340,7 @@ dialog {
   align-items: center;
   list-style: none;
   margin: 10px;
-
+  text-transform: capitalize;
 }
 
 .single_recipe_container .single_recipe .ingredients_list .single_ingredient .bullet_icon {
@@ -331,7 +357,7 @@ dialog {
   /* background-color: rgba(0, 0, 0, 0.608); */
   overflow-wrap: break-word;
   color: black;
-  padding: 10px;
+  /* padding: 10px; */
   height: 100%;
 }
 
@@ -342,6 +368,7 @@ dialog {
 
 .single_recipe_container .single_recipe .ingredients_list .description_toggle {
   font-size: 0.7rem;
+  margin: 0px;
   text-transform: uppercase;
   background: rgba(135, 206, 28, 0.413);
   color: black;

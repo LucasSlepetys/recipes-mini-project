@@ -33,7 +33,16 @@ const AddRecipe = () => {
     const ingredients_inputs = Object.fromEntries(formData);
     const list_of_ingredients = [];
     for (let key in ingredients_inputs) {
-      list_of_ingredients.push(ingredients_inputs[key]);
+      if (ingredients_inputs[key] !== '' && ingredients_inputs[key] !== null) {
+        list_of_ingredients.push(ingredients_inputs[key]);
+      }
+    }
+
+    if (
+      list_of_ingredients.length === 0 ||
+      recipeNameRef.current.value === ''
+    ) {
+      return;
     }
 
     dispatch({
@@ -49,7 +58,6 @@ const AddRecipe = () => {
     });
     dispatch({ type: ADD_NEW_RECIPE });
     reset_action();
-    console.log(state.recipes);
   };
 
   const handleSubmit = (e) => {

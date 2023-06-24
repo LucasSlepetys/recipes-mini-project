@@ -1,11 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { FaCaretRight, FaCaretDown, FaCircle } from 'react-icons/fa';
+import { FaCaretRight, FaCaretDown, FaCircle, FaTimes } from 'react-icons/fa';
+import { getContext } from '../CONTROL/GlobalContext';
+import { REMOVE_A_RECIPE } from '../CONTROL/actions';
 
-function SingleRecipe({ ingredients_list, name, description }) {
+function SingleRecipe({ ingredients_list, name, description, id }) {
   const [showIngredients, setShowIngredients] = useState(false);
   const [showDescription, setShowDescription] = useState(false);
   const [styleHeight, setStyleHeight] = useState({});
   const ingredient_list_container = useRef(null);
+  const { dispatch } = getContext();
 
   useEffect(() => {
     setStyleHeight({
@@ -18,6 +21,10 @@ function SingleRecipe({ ingredients_list, name, description }) {
     });
   }, [showIngredients, showDescription]);
 
+  const deleteRecipe = () => {
+    dispatch({ type: REMOVE_A_RECIPE, payload: { recipe_id: id } });
+  };
+
   return (
     <li className='single_recipe_container'>
       <div
@@ -29,10 +36,15 @@ function SingleRecipe({ ingredients_list, name, description }) {
             setShowIngredients(!showIngredients);
           }}
         >
-          <div className='arrow_icon'>
-            {showIngredients ? <FaCaretDown /> : <FaCaretRight />}
+          <div className='left_header'>
+            <div className='arrow_icon'>
+              {showIngredients ? <FaCaretDown /> : <FaCaretRight />}
+            </div>
+            <h5>{name}</h5>
           </div>
-          <h5>{name}</h5>
+          <div className='right_header' onClick={deleteRecipe}>
+            <FaTimes />
+          </div>
         </div>
         {showIngredients && (
           <div className='ingredients_list_container' style={styleHeight}>
@@ -54,7 +66,7 @@ function SingleRecipe({ ingredients_list, name, description }) {
                 <p className='description'>
                   <span>Description </span>
                   <br />
-                  {description}
+                  {description ? description : 'No Description'}
                 </p>
               )}
               <button
