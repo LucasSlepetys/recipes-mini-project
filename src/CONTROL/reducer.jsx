@@ -1,7 +1,7 @@
 import {
   TOGGLE_SHOW_RECIPES,
   TOGGLE_SHOW_ADD_RECIPE,
-  ADD_INGREDIENT_TO_NEW_RECIPE,
+  ADD_INGREDIENTS_TO_NEW_RECIPE,
   INCREASE_COUNT,
   ADD_NAME_TO_NEW_RECIPE,
   ADD_NEW_RECIPE,
@@ -28,12 +28,15 @@ const reducer = (state, action) => {
     };
   }
 
-  if (action.type === ADD_INGREDIENT_TO_NEW_RECIPE) {
+  if (action.type === ADD_INGREDIENTS_TO_NEW_RECIPE) {
     return {
       ...state,
       recipeToAdd: {
         ...state.recipeToAdd,
-        [action.payload.ingredient_id]: action.payload.ingredient_value,
+        ingredients_list: [
+          ...state.recipeToAdd.ingredients_list,
+          ...action.payload.ingredients_values,
+        ],
       },
     };
   }
@@ -51,6 +54,7 @@ const reducer = (state, action) => {
       recipeToAdd: {
         name: 'Name_Default',
         description: 'description',
+        ingredients_list: ['test'],
       },
     };
   }

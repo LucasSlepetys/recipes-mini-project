@@ -8,12 +8,14 @@ import {
   ADD_NEW_RECIPE,
   CLEAR_NEW_RECIPE,
   RESET_COUNT,
+  ADD_INGREDIENTS_TO_NEW_RECIPE,
 } from '../CONTROL/actions';
 import { useEffect, useRef } from 'react';
 import Dialog from './Dialog';
 
 const AddRecipe = () => {
   const { state, dispatch } = getContext();
+  const formContainerRef = useRef(null);
   const recipeNameRef = useRef(null);
 
   useEffect(() => {
@@ -27,6 +29,18 @@ const AddRecipe = () => {
   };
 
   const add_recipe = () => {
+    const formData = new FormData(formContainerRef.current);
+    const ingredients_inputs = Object.fromEntries(formData);
+    const list_of_ingredients = [];
+    for (let key in ingredients_inputs) {
+      list_of_ingredients.push(ingredients_inputs[key]);
+    }
+
+    dispatch({
+      type: ADD_INGREDIENTS_TO_NEW_RECIPE,
+      payload: { ingredients_values: list_of_ingredients },
+    });
+
     dispatch({
       type: ADD_NAME_TO_NEW_RECIPE,
       payload: {
@@ -46,7 +60,7 @@ const AddRecipe = () => {
   return (
     <>
       <div className='add_recipe_container'>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} ref={formContainerRef}>
           <div className='input_row' style={{ padding: '20px' }}>
             <label htmlFor='recipe_name' className='name-label'>
               Recipe Name
