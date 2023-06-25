@@ -164,7 +164,7 @@ main {
   font-size: 2rem;
 }
 
-/* ---- TOGGLE THEME COMPONENT ---- */
+/* ---- TOGGLE THEME COMPONENT (COPIED AND PASTED) ---- */
 
 .checkbox {
   opacity: 0;
@@ -182,6 +182,11 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.fas {
+  display: grid;
+  place-items: center;
 }
 
 .fa-moon {
