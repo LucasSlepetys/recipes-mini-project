@@ -11,6 +11,9 @@ function SingleRecipe({ ingredients_list, name, description, id }) {
   const { dispatch } = getContext();
 
   useEffect(() => {
+    console.log(
+      ingredient_list_container?.current?.getBoundingClientRect()?.height || '0'
+    );
     setStyleHeight({
       height: showIngredients
         ? `${
@@ -46,44 +49,43 @@ function SingleRecipe({ ingredients_list, name, description, id }) {
             <FaTimes />
           </div>
         </div>
-        {showIngredients && (
-          <div className='ingredients_list_container' style={styleHeight}>
-            <div ref={ingredient_list_container} className='ingredients_list'>
-              <h4>Ingredients</h4>
-              <ul>
-                {ingredients_list.map((ingredient, index) => {
-                  return (
-                    <li className='single_ingredient' key={index}>
-                      <div className='bullet_icon'>
-                        <FaCircle />
-                      </div>
-                      <p>{ingredient}</p>
-                    </li>
-                  );
-                })}
-              </ul>
-              {showDescription && (
-                <p className='description'>
-                  <span>Description </span>
-                  <br />
-                  {description ? description : 'No Description'}
-                </p>
-              )}
-              <button
-                onClick={() => {
-                  setShowDescription(!showDescription);
-                }}
-                className={
-                  showDescription
-                    ? 'btn description_toggle description_toggle_hide'
-                    : 'btn description_toggle'
-                }
-              >
-                {showDescription ? 'Hide Description' : 'Show Description'}
-              </button>
-            </div>
+
+        <div className='ingredients_list_container' style={styleHeight}>
+          <div ref={ingredient_list_container} className='ingredients_list'>
+            <h4>Ingredients</h4>
+            <ul>
+              {ingredients_list.map((ingredient, index) => {
+                return (
+                  <li className='single_ingredient' key={index}>
+                    <div className='bullet_icon'>
+                      <FaCircle />
+                    </div>
+                    <p>{ingredient}</p>
+                  </li>
+                );
+              })}
+            </ul>
+            {showDescription && (
+              <p className='description'>
+                <span>Description </span>
+                <br />
+                {description ? description : 'No Description'}
+              </p>
+            )}
+            <button
+              onClick={() => {
+                setShowDescription(!showDescription);
+              }}
+              className={
+                showDescription
+                  ? 'btn description_toggle description_toggle_hide'
+                  : 'btn description_toggle'
+              }
+            >
+              {showDescription ? 'Hide Description' : 'Show Description'}
+            </button>
           </div>
-        )}
+        </div>
       </div>
     </li>
   );

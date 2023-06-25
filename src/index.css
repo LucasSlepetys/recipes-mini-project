@@ -117,7 +117,9 @@
   position: absolute;
   height: 90%;
   width: 100%;
-  top: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   padding: 20px;
   overflow-y: scroll;
 }
@@ -150,6 +152,9 @@
   border: none;
   background: none;
   outline: none;
+  text-decoration: none;
+  display: inline-block;
+
   border-bottom: 2px solid rgba(0, 0, 0, 0.454);
   color: rgb(0, 0, 0);
   padding: 0.275rem 0.75rem;
@@ -169,6 +174,9 @@
 }
 
 .add_recipe_container .input_row .name-input {
+  outline: none;
+  text-decoration: none;
+  display: inline-block;
   border: none;
   box-shadow: var(--btn-floating-shadow);
 }
@@ -259,12 +267,15 @@ dialog {
   justify-content: center;
   align-items: center;
   overflow: scroll;
+}
 
+.recipes_container::-webkit-scrollbar {
+  display: none;
 }
 
 .recipes_container .list_of_recipes {
   width: 90%;
-  /* height: 90%; */
+  max-height: 90%;
   margin: 20px;
   background: white;
   overflow: scroll;
@@ -290,7 +301,9 @@ dialog {
   /* background: #00c2d823; */
 }
 
-.single_recipe_container .single_recipe {}
+.single_recipe_container .single_recipe {
+  height: auto;
+}
 
 .single_recipe_container .single_recipe .single_recipe_header {
   display: flex;
@@ -322,12 +335,14 @@ dialog {
 }
 
 .single_recipe_container .single_recipe .ingredients_list_container {
-  /* overflow: scroll; */
+  overflow: hidden;
   transition: 0.5s ease-in-out all;
+  margin-top: 10px
 }
 
 .single_recipe_container .single_recipe .ingredients_list {
-  margin: 10px 0px 0px 12%;
+  margin: 0px 0px 0px 12%;
+
 }
 
 .single_recipe_container .single_recipe .ingredients_list h4 {
@@ -368,7 +383,7 @@ dialog {
 
 .single_recipe_container .single_recipe .ingredients_list .description_toggle {
   font-size: 0.7rem;
-  margin: 0px;
+  margin: 4px 0;
   text-transform: uppercase;
   background: rgba(135, 206, 28, 0.413);
   color: black;
@@ -391,6 +406,12 @@ dialog {
 
   .btn-reshape {
     font-size: 2rem;
+  }
+
+  .add_recipe_container {
+    background: rgba(8, 81, 199, 0.045);
+    box-shadow: var(--btn-floating-shadow);
+    width: auto;
   }
 
   .add_recipe_container .input_row {
@@ -429,8 +450,5 @@ dialog {
     width: 70%;
   }
 
-  .single_recipe_container .single_recipe .ingredients_list {
-    margin: 10px 0px 0px 3%;
-  }
 
 }
