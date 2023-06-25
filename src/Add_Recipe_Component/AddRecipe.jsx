@@ -1,5 +1,6 @@
-import AddRecipeFooter from './AddRecipeFooter';
-import Ingredient from './Ingredient';
+import Form from './Form';
+import Footer from './Footer';
+import Ingredient from './Form_Row';
 import { getContext } from '../CONTROL/GlobalContext';
 import {
   TOGGLE_SHOW_ADD_RECIPE,
@@ -11,17 +12,18 @@ import {
   ADD_INGREDIENTS_TO_NEW_RECIPE,
 } from '../CONTROL/actions';
 import { useEffect, useRef } from 'react';
-import Dialog from './Dialog';
+import Description from './Description';
 
 const AddRecipe = () => {
-  const { state, dispatch } = getContext();
-  const formContainerRef = useRef(null);
-  const recipeNameRef = useRef(null);
+  const { dispatch, RecipeFormRef } = getContext();
 
   useEffect(() => {
-    recipeNameRef.current.focus();
+    //gets the cursor focused on the recipe_name input
+    //path must be changed if any changes are made in Form
+    RecipeFormRef.current.children[0].children[0].focus();
   }, []);
 
+  //clears AddRecipe component page
   const reset_action = () => {
     dispatch({ type: CLEAR_NEW_RECIPE });
     dispatch({ type: TOGGLE_SHOW_ADD_RECIPE });
@@ -29,74 +31,50 @@ const AddRecipe = () => {
   };
 
   const add_recipe = () => {
-    const formData = new FormData(formContainerRef.current);
-    const ingredients_inputs = Object.fromEntries(formData);
-    const list_of_ingredients = [];
-    for (let key in ingredients_inputs) {
-      if (ingredients_inputs[key] !== '' && ingredients_inputs[key] !== null) {
-        list_of_ingredients.push(ingredients_inputs[key]);
+    //FORM API -- getting data from RecipeFormRef
+    const formData = new FormData(RecipeFormRef.current);
+    const formInputs = Object.fromEntries(formData);
+    //----
+    const listOfIngredients = [];
+    //gets all ingredients names from inputs in the RecipeFormRef and pushes its strings to listOfIngredients list
+    //it doesn't push any empty inputs or input's values that are equal to the recipe_name input value
+    for (let key in formInputs) {
+      if (
+        formInputs[key] !== '' &&
+        formInputs[key] !== null &&
+        formInputs[key] !== formInputs.recipe_name
+      ) {
+        listOfIngredients.push(formInputs[key]);
       }
     }
 
-    if (
-      list_of_ingredients.length === 0 ||
-      recipeNameRef.current.value === ''
-    ) {
+    //Makes it not possible to add a recipe if user hasn't provided a name for the recipe or at least one ingredient
+    if (listOfIngredients.length === 0 || formInputs.recipe_name === '') {
       return;
     }
 
+    //adds name and ingredients to state newRecipe
     dispatch({
       type: ADD_INGREDIENTS_TO_NEW_RECIPE,
-      payload: { ingredients_values: list_of_ingredients },
+      payload: { ingredients_values: listOfIngredients },
     });
-
     dispatch({
       type: ADD_NAME_TO_NEW_RECIPE,
       payload: {
-        recipe_name: recipeNameRef.current.value,
+        recipe_name: formInputs.recipe_name,
       },
     });
+    //adds the newRecipe dictionary to the recipes list in state
     dispatch({ type: ADD_NEW_RECIPE });
+    //clears the page/screen for next recipe
     reset_action();
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch({ type: INCREASE_COUNT });
   };
 
   return (
     <>
-      <div className='add_recipe_container'>
-        <form onSubmit={handleSubmit} ref={formContainerRef}>
-          <div className='input_row' style={{ padding: '20px' }}>
-            <label htmlFor='recipe_name' className='name-label'>
-              Recipe Name
-            </label>
-            <input
-              type='text'
-              id='recipe_name'
-              ref={recipeNameRef}
-              className='name-input'
-              placeholder='Risotto'
-            />
-          </div>
-
-          {Array.apply(null, { length: state.count }).map((e, i) => {
-            return (
-              <Ingredient key={i} id={`ingredient_${i + 1}`} num={i + 1} />
-            );
-          })}
-
-          <div className='center-child'>
-            <button type='submit' className='btn'>
-              ADD NEW INGREDIENT
-            </button>
-          </div>
-        </form>
-      </div>
-      <AddRecipeFooter reset_action={reset_action} add_recipe={add_recipe} />
-      <Dialog />
+      <Form />
+      <Footer reset_action={reset_action} add_recipe={add_recipe} />
+      <Description />
     </>
   );
 };

@@ -11,19 +11,18 @@ function SingleRecipe({ ingredients_list, name, description, id }) {
   const { dispatch } = getContext();
 
   useEffect(() => {
-    console.log(
-      ingredient_list_container?.current?.getBoundingClientRect()?.height || '0'
-    );
+    //sets styleHeight.height to height of ingredient_list_container
+    //updates the style height when anything else is shown or hidden in the container
     setStyleHeight({
       height: showIngredients
         ? `${
-            ingredient_list_container?.current?.getBoundingClientRect()
-              ?.height || '0'
+            ingredient_list_container.current.getBoundingClientRect().height
           }px`
         : '0px',
     });
   }, [showIngredients, showDescription]);
 
+  //deletes the corresponding recipe from state.recipes
   const deleteRecipe = () => {
     dispatch({ type: REMOVE_A_RECIPE, payload: { recipe_id: id } });
   };

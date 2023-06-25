@@ -9,3 +9,4 @@ export const INCREASE_COUNT = 'INCREASE_COUNT';
 export const RESET_COUNT = 'RESET_COUNT';
 export const CLEAR_STATE = 'CLEAR_STATE';
 export const REMOVE_A_RECIPE = 'REMOVE_A_RECIPE';
+export const TOGGLE_THEME = 'TOGGLE_THEME';

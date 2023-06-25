@@ -10,11 +10,18 @@ import {
   ADD_DESCRIPTION,
   CLEAR_STATE,
   REMOVE_A_RECIPE,
+  TOGGLE_THEME,
 } from './actions';
 
 import { nanoid } from 'nanoid';
 
 const reducer = (state, action) => {
+  //for each case:
+  //must have const returnData being equal to the data to be returned
+  //must have:
+  //localStorage.setItem('recipes', JSON.stringify(returnData));
+  //return returnData;
+
   if (action.type === TOGGLE_SHOW_RECIPES) {
     const returnData = {
       ...state,
@@ -25,6 +32,7 @@ const reducer = (state, action) => {
     return returnData;
     // ! ------ --------------------------- ------ !
   }
+
   if (action.type === TOGGLE_SHOW_ADD_RECIPE) {
     const returnData = {
       ...state,
@@ -68,6 +76,7 @@ const reducer = (state, action) => {
   }
 
   if (action.type === ADD_NEW_RECIPE) {
+    //adds an unique id to the recipe dictionary
     const recipeToBeAdded = { ...state.recipeToAdd, id: nanoid() };
 
     const returnData = {
@@ -138,6 +147,7 @@ const reducer = (state, action) => {
       isRecipesDisplayed: true,
       isAddRecipeDisplayed: false,
       count: 1,
+      dark_theme: state.theme,
     };
     // ! ------ return & local storage data ------ !
     localStorage.setItem('recipes', JSON.stringify(returnData));
@@ -148,6 +158,7 @@ const reducer = (state, action) => {
   if (action.type === REMOVE_A_RECIPE) {
     const newRecipes = [];
 
+    //adds all recipes to newRecipes list besides the only who's id is equal to the payload id
     state.recipes.forEach((recipe) => {
       if (recipe.id !== action.payload.recipe_id) {
         newRecipes.push(recipe);
@@ -155,6 +166,15 @@ const reducer = (state, action) => {
     });
 
     const returnData = { ...state, recipes: newRecipes };
+
+    // ! ------ return & local storage data ------ !
+    localStorage.setItem('recipes', JSON.stringify(returnData));
+    return returnData;
+    // ! ------ --------------------------- ------ !
+  }
+
+  if (action.type === TOGGLE_THEME) {
+    const returnData = { ...state, dark_theme: !state.dark_theme };
 
     // ! ------ return & local storage data ------ !
     localStorage.setItem('recipes', JSON.stringify(returnData));

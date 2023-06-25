@@ -1,3 +1,4 @@
+import { ThemeToggle } from './ThemeToggle';
 import { getContext } from '../CONTROL/GlobalContext';
 import {
   TOGGLE_SHOW_RECIPES,
@@ -8,26 +9,30 @@ const Hero = () => {
   const { dispatch } = getContext();
 
   return (
-    <div className='hero'>
-      <button
-        type='button'
-        className='btn btn-reshape'
-        onClick={() => {
-          dispatch({ type: TOGGLE_SHOW_RECIPES });
-        }}
-      >
-        Show Recipes
-      </button>
-      <button
-        type='button'
-        className='btn btn-reshape'
-        onClick={() => {
-          dispatch({ type: TOGGLE_SHOW_ADD_RECIPE });
-        }}
-      >
-        Add Recipe
-      </button>
-    </div>
+    <>
+      <ThemeToggle />
+
+      <div className='hero'>
+        <button
+          type='button'
+          className='btn btn-reshape'
+          onClick={() => {
+            dispatch({ type: TOGGLE_SHOW_RECIPES });
+          }}
+        >
+          Show Recipes
+        </button>
+        <button
+          type='button'
+          className='btn btn-reshape'
+          onClick={() => {
+            dispatch({ type: TOGGLE_SHOW_ADD_RECIPE });
+          }}
+        >
+          Add Recipe
+        </button>
+      </div>
+    </>
   );
 };
 

@@ -8,10 +8,12 @@ function App() {
   const { state } = getContext();
 
   return (
-    <main>
-      {!state.isRecipesDisplayed && !state.isAddRecipeDisplayed && <Hero />}
-      {state.isAddRecipeDisplayed && <AddRecipe />}
-      {state.isRecipesDisplayed && <ShowRecipes />}
+    <main className={state.dark_theme ? ' dark-theme' : ' light-theme'}>
+      <div className='bg-color-change'>
+        {!state.isRecipesDisplayed && !state.isAddRecipeDisplayed && <Hero />}
+        {state.isAddRecipeDisplayed && <AddRecipe />}
+        {state.isRecipesDisplayed && <ShowRecipes />}
+      </div>
     </main>
   );
 }

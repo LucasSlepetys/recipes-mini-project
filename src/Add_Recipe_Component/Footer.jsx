@@ -1,6 +1,6 @@
 import React from 'react';
 import { getContext } from '../CONTROL/GlobalContext';
-function AddRecipeFooter({ reset_action, add_recipe }) {
+function Footer({ reset_action, add_recipe }) {
   const { showModal } = getContext();
   return (
     <div className='footer_container'>
@@ -27,4 +27,4 @@ function AddRecipeFooter({ reset_action, add_recipe }) {
   );
 }
 
-export default AddRecipeFooter;
+export default Footer;

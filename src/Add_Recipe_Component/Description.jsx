@@ -3,11 +3,12 @@ import { FaCheckDouble } from 'react-icons/fa';
 import { getContext } from '../CONTROL/GlobalContext';
 import { ADD_DESCRIPTION } from '../CONTROL/actions';
 
-const Dialog = () => {
+const Description = () => {
   const { dialogRef, closeModal, dispatch } = getContext();
 
   const textareaRef = useRef();
 
+  //sets description value whenever user makes a change to textareaRef
   const handleChange = () => {
     dispatch({
       type: ADD_DESCRIPTION,
@@ -30,4 +31,4 @@ const Dialog = () => {
   );
 };
 
-export default Dialog;
+export default Description;
